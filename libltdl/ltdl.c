@@ -178,6 +178,10 @@ loader_init_callback (lt_dlhandle handle)
 }
 #endif /* HAVE_LIBDLLOADER */
 
+// TODO: fix the clang sanitization issue with the function's prototype
+#if defined __clang__ && __clang_major__ >= 20
+  __attribute__ ((no_sanitize ("function")))
+#endif
 static int
 loader_init (lt_get_vtable *vtable_func, lt_user_data data)
 {
